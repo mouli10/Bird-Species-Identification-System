@@ -90,9 +90,6 @@ Various testing techniques were applied to ensure system reliability:
 - **Professor:** Dr. Michael Johnson
 - **Mentor:** Dr. Razi Iqbal
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Contact
 For any inquiries or contributions, feel free to reach out via GitHub issues or email [moulivunnam100@gmail.com]
 
