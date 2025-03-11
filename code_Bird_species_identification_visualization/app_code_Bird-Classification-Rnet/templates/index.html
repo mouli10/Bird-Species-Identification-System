@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Information Portal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5">AN AUTOMATED BIRD SPECIES IDENTIFICATION SYSTEM</h1>
+    
+    <!-- Image Upload Form -->
+    <form method="POST" enctype="multipart/form-data" class="mt-4">
+        <div class="form-group">
+            <label for="image">Upload an Image of a Bird:</label>
+            <input type="file" name="image" id="image" accept="image/*" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Image</button>
+    </form>
+
+    {% if filename %}
+        <h2 class="mt-5">Uploaded Image:</h2>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" class="img-fluid">
+        <h3>Predicted Bird Species: {{ bird_info.common_name }}</h3>
+    {% endif %}
+
+    {% if bird_info %}
+        <h2 class="mt-5">{{ bird_info.common_name }} - {{ bird_info.scientific_name }}</h2>
+        <p><strong>Description:</strong> {{ bird_info.wiki_description }}</p>
+        
+        <h3>Distribution and Status</h3>
+        <div class="table-responsive">
+            {{ bird_info.distribution_status | safe }}
+        </div>
+
+        {% if bird_info.heatmap_file %}
+            <h3>Geolocation Heatmap</h3>
+            <iframe src="{{ url_for('static', filename='heatmap.html') }}" width="100%" height="400px"></iframe>
+        {% endif %}
+    {% endif %}
+</div>
+
+</body>
+</html>
